@@ -1,14 +1,16 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+
 
 class Article(models.Model):
     ARTICLE_CHOICES = [
-        ('a joke',"hazil"),
+        ('a joke',"Hazil"),
         ('information',"Ma'lumot"),
         ('fact',"Fakt")
     ]
     title = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField()
-    create_at = models.DateTimeField(auto_created=True)
+    description = RichTextField()
+    create_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, choices=ARTICLE_CHOICES)
 
 class Me(models.Model):
