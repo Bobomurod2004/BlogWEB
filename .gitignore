@@ -1,0 +1,24 @@
+# Python fayllari
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# Django fayllari
+db.sqlite3
+*.log
+staticfiles/
+media/
+
+# Secret fayllar
+.env
+
+# OS fayllari
+.DS_Store
+Thumbs.db
+
+# IDE fayllari (VSCode, PyCharm)
+.vscode/
+.idea/

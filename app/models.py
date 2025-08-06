@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -30,6 +32,9 @@ class AboutMe(models.Model):
 class TechnologyStack(models.Model):
     name = models.CharField(max_length=100, null=True ,blank=True)
 
+    def __str__(self):
+        return self.name
+
 class Project(models.Model):
 
     PROJECT_CHOICES = [
@@ -39,17 +44,18 @@ class Project(models.Model):
         ("fast_api","FAST API")
     ]
 
-    create_at = models.DateTimeField(auto_now=True)
+    create_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, null=True, blank=True)
-    description = models.TextField()
+    description = RichTextField()
     project_image = models.ImageField()
     status = models.CharField(max_length=100, choices=PROJECT_CHOICES, null=True, blank=True)
-    git_link = models.URLField()
-    link = models.URLField()
+    git_link = models.URLField(null=True, blank=True)
+    link = models.URLField(null=True, blank=True)
     technology_stack = models.ManyToManyField(
         TechnologyStack, related_name='project_stack',
 
     )
+
 
 class Skill(models.Model):
     key = models.CharField(max_length=100, null=True, blank=True)

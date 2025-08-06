@@ -3,7 +3,7 @@ from . import models
 
 @admin.register(models.Project)
 class ProjectAdmin(admin.ModelAdmin):
-    fields = 'create_at', 'title', 'description', 'project_image','status', 'git_link', 'link' ,'technology_stack'
+    fields =['title', 'description', 'project_image','status', 'git_link', 'link' ,'technology_stack']
 
 # admin.site.register(models.Project)
 admin.site.register(models.TechnologyStack)
