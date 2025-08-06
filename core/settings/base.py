@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+import dj_database_url
 from ckeditor_demo.settings import SECRET_KEY, BASE_DIR
 from decouple import config
 
@@ -89,6 +90,7 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
+        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
     }
 }
 
