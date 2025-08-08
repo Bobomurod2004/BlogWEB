@@ -28,9 +28,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-iz1hhe7*#@7y8)f%a(gcgezb!@_@p89+e0#hr+j@r)by#49y--'
 SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG rejimini environment variable orqali boshqarish
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
-ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']
+
+DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
+
+# Agar production bo'lsa (DEBUG=False), barcha Render hostlariga ruxsat berish
+if not DEBUG:
+    ALLOWED_HOSTS.extend(['.onrender.com'])
+
 
 
 # Application definition
