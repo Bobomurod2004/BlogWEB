@@ -31,13 +31,7 @@ SECRET_KEY = config("SECRET_KEY")
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
 
-DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
-
-# Agar production bo'lsa (DEBUG=False), barcha Render hostlariga ruxsat berish
-if not DEBUG:
-    ALLOWED_HOSTS.extend(['blogweb-1-ilwb.onrender.com'])
-
-
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 # Application definition
 
@@ -87,24 +81,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-if config('DATABASE_URL', default=None):
-    # Production (Render) - DATABASE_URL orqali
-    DATABASES = {
-        'default': dj_database_url.parse(config('DATABASE_URL'))
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DATABASE_NAME"),
+        "USER": config("DATABASE_USER"),
+        "PASSWORD": config("DATABASE_PASSWORD"),
+        "HOST": config("DATABASE_HOST", default="127.0.0.1"),
+        "PORT": config("DATABASE_PORT", default="5432"),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DATABASE_NAME'),
-            'USER': config('DATABASE_USER'),
-            'PASSWORD': config('DATABASE_PASSWORD'),
-            'HOST': config('DATABASE_HOST', default='localhost'),
-            'PORT': config('DATABASE_PORT', default='5432')
-        }
-    }
-
-
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
