@@ -35,7 +35,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() in ['true', '1', 'yes']
 
 # Agar production bo'lsa (DEBUG=False), barcha Render hostlariga ruxsat berish
 if not DEBUG:
-    ALLOWED_HOSTS.extend(['.onrender.com'])
+    ALLOWED_HOSTS.extend(['blogweb-1-ilwb.onrender.com'])
 
 
 
